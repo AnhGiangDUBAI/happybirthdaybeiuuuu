@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xem Lời Chúc 💕</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background-attachment: fixed;
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            color: #667eea;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.5em;
+        }
+
+        .stats {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border-radius: 15px;
+        }
+
+        .stats h2 {
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .wish-list {
+            margin-top: 30px;
+        }
+
+        .wish-card {
+            background: white;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-radius: 15px;
+            border-left: 5px solid #667eea;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            animation: slideIn 0.5s ease;
+        }
+
+        .wish-card p {
+            color: #333;
+            font-size: 1.1em;
+            line-height: 1.8;
+            margin-bottom: 15px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .wish-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+
+        .timestamp {
+            color: #999;
+            font-size: 0.9em;
+        }
+
+        .wish-number {
+            background: #667eea;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #999;
+        }
+
+        .empty-state h2 {
+            font-size: 1.5em;
+            margin-bottom: 10px;
+        }
+
+        .back-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.5);
+        }
+
+        .export-btn {
+            background: linear-gradient(135deg, #f093fb, #f5576c);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1em;
+            margin: 20px auto;
+            display: block;
+            transition: all 0.3s ease;
+        }
+
+        .export-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(245, 87, 108, 0.4);
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 1.8em;
+            }
+
+            .wish-card p {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>💌 Lời Chúc Từ Em</h1>
+        
+        <div class="stats">
+            <h2 id="totalWishes">0</h2>
+            <p>Lời chúc đã nhận</p>
+        </div>
+
+        <button class="export-btn" onclick="exportToText()">📥 Tải về file Text</button>
+
+        <div class="wish-list" id="wishList"></div>
+
+        <div style="text-align: center;">
+            <a href="gift.html" class="back-btn">← Quay lại</a>
+        </div>
+    </div>
+
+    <script>
+        function loadWishes() {
+            const wishes = JSON.parse(localStorage.getItem('birthdayWishes') || '[]');
+            const wishList = document.getElementById('wishList');
+            const totalWishes = document.getElementById('totalWishes');
+
+            totalWishes.textContent = wishes.length;
+
+            if (wishes.length === 0) {
+                wishList.innerHTML = `
+                    <div class="empty-state">
+                        <h2>Chưa có lời chúc nào</h2>
+                        <p>Người yêu chưa viết lời chúc cho bạn</p>
+                    </div>
+                `;
+                return;
+            }
+
+            wishList.innerHTML = '';
+            wishes.forEach((wish, index) => {
+                const wishCard = document.createElement('div');
+                wishCard.className = 'wish-card';
+                wishCard.innerHTML = `
+                    <p>${wish.text}</p>
+                    <div class="wish-meta">
+                        <span class="timestamp">📅 ${wish.timestamp}</span>
+                        <span class="wish-number">#${wishes.length - index}</span>
+                    </div>
+                `;
+                wishList.appendChild(wishCard);
+            });
+        }
+
+        function exportToText() {
+            const wishes = JSON.parse(localStorage.getItem('birthdayWishes') || '[]');
+            
+            if (wishes.length === 0) {
+                alert('Chưa có lời chúc nào để tải!');
+                return;
+            }
+
+            let content = '💌 LỜI CHÚC SINH NHẬT TỪ EM YÊU 💕\n\n';
+            content += '='.repeat(50) + '\n\n';
+            
+            wishes.forEach((wish, index) => {
+                content += `Lời chúc #${wishes.length - index}\n`;
+                content += `Thời gian: ${wish.timestamp}\n`;
+                content += `Nội dung:\n${wish.text}\n`;
+                content += '\n' + '-'.repeat(50) + '\n\n';
+            });
+
+            const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'loi-chuc-sinh-nhat.txt';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+
+        // Load wishes on page load
+        loadWishes();
+
+        // Auto refresh every 5 seconds
+        setInterval(loadWishes, 5000);
+    </script>
+</body>
+</html>

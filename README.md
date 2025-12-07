@@ -52,3 +52,34 @@ Mở file `style.css` và tìm các dòng sau để đổi màu:
 - `#ffecd2`, `#fcb69f` - Màu nền gradient
 
 Chúc bạn có một ngày sinh nhật thật đặc biệt! 💕
+
+
+Khi bạn sửa code, chỉ cần chạy 3 lệnh:
+
+git add .
+
+git commit -m "Update code"
+
+git push
+Website sẽ tự động cập nhật sau 1-2 phút!
+
+Ví dụ cụ thể:
+Bạn sửa lời chúc trong file gift.html:
+
+Mở file gift.html, sửa nội dung
+Lưu file
+Mở Command Prompt trong thư mục D:\Béiu
+Chạy:
+git add .
+git commit -m "Sửa lời chúc"
+git push
+Đợi 1-2 phút → Refresh website → Thấy thay đổi!
+Nếu thêm ảnh mới:
+git add .
+git commit -m "Thêm ảnh"
+git push
+Lưu ý:
+Lần đầu push có thể hỏi username/password (dùng token)
+Từ lần 2 trở đi, Git sẽ nhớ và không hỏi nữa
+Mỗi lần sửa chỉ cần 3 lệnh trên là xong!
+Rất tiện phải không?

@@ -83,7 +83,7 @@ const saveBtn = document.getElementById('saveBtn');
 const savedWishesDiv = document.getElementById('savedWishes');
 
 if (wishInput && saveBtn) {
-    // Save new wish (chỉ lưu vào localStorage, không hiển thị)
+    // Save new wish (không thể xóa sau khi lưu)
     saveBtn.addEventListener('click', () => {
         const wishText = wishInput.value.trim();
         if (wishText === '') {
@@ -91,10 +91,16 @@ if (wishInput && saveBtn) {
             return;
         }
 
+        // Confirm before saving (không thể xóa sau này)
+        if (!confirm('Lời chúc sẽ được lưu vĩnh viễn và không thể xóa. Bạn có chắc chắn?')) {
+            return;
+        }
+
         const wishes = JSON.parse(localStorage.getItem('birthdayWishes') || '[]');
         const newWish = {
             text: wishText,
-            timestamp: new Date().toLocaleString('vi-VN')
+            timestamp: new Date().toLocaleString('vi-VN'),
+            id: Date.now() // Unique ID
         };
         
         wishes.unshift(newWish);
@@ -103,7 +109,7 @@ if (wishInput && saveBtn) {
         wishInput.value = '';
         
         // Show success animation
-        saveBtn.textContent = '✓ Đã lưu!';
+        saveBtn.textContent = '✓ Đã lưu vĩnh viễn!';
         setTimeout(() => {
             saveBtn.textContent = '💾 Lưu lại';
         }, 2000);
