@@ -83,35 +83,63 @@ const saveBtn = document.getElementById('saveBtn');
 const savedWishesDiv = document.getElementById('savedWishes');
 
 if (wishInput && saveBtn) {
-    // Save new wish (không thể xóa sau khi lưu)
-    saveBtn.addEventListener('click', () => {
+    // Google Sheets URL
+    const GOOGLE_SHEETS_URL = 'https://script.google.com/macros/s/AKfycbx_vTUoO0tqUZtV2crCByg-c8Fb1ICOW1Mkq3BVFKkUzAe-Bc-t5eskN4-c09nNnZC47g/exec';
+    
+    // Save new wish (lưu vào Google Sheets)
+    saveBtn.addEventListener('click', async () => {
         const wishText = wishInput.value.trim();
         if (wishText === '') {
             alert('Hãy viết gì đó đi em! 💕');
             return;
         }
 
-        // Confirm before saving (không thể xóa sau này)
+        // Confirm before saving
         if (!confirm('Lời chúc sẽ được lưu vĩnh viễn và không thể xóa. Bạn có chắc chắn?')) {
             return;
         }
 
-        const wishes = JSON.parse(localStorage.getItem('birthdayWishes') || '[]');
+        // Disable button while saving
+        saveBtn.disabled = true;
+        saveBtn.textContent = '⏳ Đang lưu...';
+
         const newWish = {
             text: wishText,
             timestamp: new Date().toLocaleString('vi-VN'),
-            id: Date.now() // Unique ID
+            id: Date.now()
         };
-        
-        wishes.unshift(newWish);
-        localStorage.setItem('birthdayWishes', JSON.stringify(wishes));
-        
-        wishInput.value = '';
-        
-        // Show success animation
-        saveBtn.textContent = '✓ Đã lưu vĩnh viễn!';
-        setTimeout(() => {
-            saveBtn.textContent = '💾 Lưu lại';
-        }, 2000);
+
+        try {
+            // Save to Google Sheets
+            const response = await fetch(GOOGLE_SHEETS_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(newWish)
+            });
+
+            // Also save to localStorage as backup
+            const wishes = JSON.parse(localStorage.getItem('birthdayWishes') || '[]');
+            wishes.unshift(newWish);
+            localStorage.setItem('birthdayWishes', JSON.stringify(wishes));
+
+            wishInput.value = '';
+            
+            // Show success
+            saveBtn.textContent = '✓ Đã lưu thành công!';
+            alert('Lời chúc đã được gửi! Cảm ơn em yêu! 💕');
+            
+        } catch (error) {
+            console.error('Error:', error);
+            saveBtn.textContent = '❌ Lỗi! Thử lại';
+            alert('Có lỗi xảy ra. Vui lòng thử lại!');
+        } finally {
+            saveBtn.disabled = false;
+            setTimeout(() => {
+                saveBtn.textContent = '💾 Lưu lại';
+            }, 3000);
+        }
     });
 }
