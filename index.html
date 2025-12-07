@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chúc Mừng Sinh Nhật Em Yêu 💕</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="content">
+            <h1 class="fade-in">Chúc Mừng Sinh Nhật</h1>
+            <h2 class="fade-in-delay">Em Yêu Của Anh 💕</h2>
+            
+            <!-- Phần ảnh - Thay "photo.jpg" bằng tên ảnh của bạn -->
+            <div class="photo-container fade-in-delay-1">
+                <img src="photo.jpg" alt="Ảnh của em" class="main-photo">
+                <div class="photo-frame"></div>
+            </div>
+            
+            <div class="message fade-in-delay-2">
+                <p>Chúc em tuổi mới luôn tươi trẻ, xinh đẹp</p>
+                <p>Luôn vui vẻ, hạnh phúc bên anh</p>
+                <p>Anh yêu em nhiều lắm! ❤️</p>
+            </div>
+
+            <!-- Hộp quà -->
+            <div class="gift-container fade-in-delay-3">
+                <div class="gift-box" id="giftBox">
+                    <div class="gift-lid">
+                        <div class="gift-bow">🎀</div>
+                    </div>
+                    <div class="gift-body">🎁</div>
+                </div>
+                <p class="gift-hint">Click vào hộp quà! 🎁</p>
+            </div>
+
+            <div class="cake fade-in-delay-3">
+                <div class="candle">
+                    <div class="flame"></div>
+                </div>
+                🎂
+            </div>
+
+        </div>
+
+        <div class="balloons">
+            <div class="balloon balloon-1">🎈</div>
+            <div class="balloon balloon-2">🎈</div>
+            <div class="balloon balloon-3">🎈</div>
+        </div>
+    </div>
+
+    <audio id="bgMusic" loop>
+        <source src="happy-birthday.mp3" type="audio/mpeg">
+    </audio>
+
+    <script src="script.js"></script>
+</body>
+</html>
+<!-- Cách 1: Xem trực tiếp trên trang web
+
+Mở trang gift.html
+Cuộn xuống phần "Em có điều gì muốn nói không?"
+Tất cả lời nhắn đã lưu sẽ hiển thị ở đó
+Cách 2: Xem trong Console của trình duyệt
+
+Mở trang gift.html
+Nhấn F12 để mở Developer Tools
+Vào tab Console
+Gõ lệnh: localStorage.getItem('birthdayWishes')
+Nhấn Enter để xem dữ liệu -->

@@ -1,0 +1,487 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background-attachment: fixed;
+    min-height: 100vh;
+    padding: 40px 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.container {
+    position: relative;
+    width: 100%;
+    max-width: 900px;
+    padding: 20px;
+    margin: 0 auto;
+}
+
+.content {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 30px;
+    padding: 60px 40px;
+    text-align: center;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+h1 {
+    font-size: 2.5em;
+    color: #667eea;
+    margin-bottom: 40px;
+    font-weight: 400;
+}
+
+.cake {
+    font-size: 8em;
+    margin: 40px 0;
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.cake:hover {
+    transform: scale(1.1) rotate(5deg);
+}
+
+.candle {
+    position: absolute;
+    top: -30px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.flame {
+    width: 20px;
+    height: 35px;
+    background: #ffd700;
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+    position: relative;
+    animation: flicker 0.3s infinite alternate;
+    box-shadow: 0 0 30px #ffd700;
+}
+
+@keyframes flicker {
+    0% {
+        transform: scale(1) translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1.1) translateY(-3px);
+        opacity: 0.8;
+    }
+}
+
+.message {
+    margin: 40px 0;
+    line-height: 2.5;
+}
+
+.message p {
+    font-size: 1.4em;
+    color: #555;
+    margin: 15px 0;
+}
+
+.music-btn {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    border: none;
+    padding: 18px 45px;
+    font-size: 1.2em;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 20px 10px;
+}
+
+.music-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(102, 126, 234, 0.5);
+}
+
+.music-btn:active {
+    transform: translateY(-1px);
+}
+
+.back-btn {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.3);
+    color: #667eea;
+    border: 2px solid #667eea;
+    padding: 15px 40px;
+    font-size: 1.1em;
+    border-radius: 50px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    margin: 20px 10px;
+}
+
+.back-btn:hover {
+    background: #667eea;
+    color: white;
+    transform: translateY(-3px);
+}
+
+.balloons {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    pointer-events: none;
+    z-index: -1;
+}
+
+.balloon {
+    position: absolute;
+    font-size: 3em;
+    animation: float 6s ease-in-out infinite;
+}
+
+.balloon-1 {
+    left: 10%;
+    animation-delay: 0s;
+}
+
+.balloon-2 {
+    left: 50%;
+    animation-delay: 2s;
+}
+
+.balloon-3 {
+    right: 10%;
+    animation-delay: 4s;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(100vh) rotate(0deg);
+    }
+    50% {
+        transform: translateY(-20vh) rotate(180deg);
+    }
+}
+
+/* Fade in animations */
+.fade-in {
+    animation: fadeIn 1s ease-in;
+}
+
+.fade-in-delay {
+    animation: fadeIn 1s ease-in 0.5s both;
+}
+
+.fade-in-delay-2 {
+    animation: fadeIn 1s ease-in 1s both;
+}
+
+.fade-in-delay-3 {
+    animation: fadeIn 1s ease-in 1.5s both;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Wishes Section */
+.wishes-section {
+    margin-top: 50px;
+    padding-top: 40px;
+    border-top: 2px solid rgba(102, 126, 234, 0.2);
+}
+
+.wishes-section h3 {
+    font-size: 1.5em;
+    color: #667eea;
+    margin-bottom: 20px;
+    font-weight: 400;
+}
+
+.input-row {
+    display: flex;
+    gap: 15px;
+    align-items: stretch;
+}
+
+#wishInput {
+    flex: 1;
+    min-height: 120px;
+    padding: 15px;
+    border: 2px solid rgba(102, 126, 234, 0.3);
+    border-radius: 15px;
+    font-size: 1em;
+    font-family: inherit;
+    resize: vertical;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.8);
+}
+
+#wishInput:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 15px rgba(102, 126, 234, 0.3);
+}
+
+.save-btn {
+    background: linear-gradient(135deg, #f093fb, #f5576c);
+    color: white;
+    border: none;
+    padding: 0 30px;
+    font-size: 1em;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    flex-shrink: 0;
+    align-self: stretch;
+    min-width: 120px;
+}
+
+.save-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(245, 87, 108, 0.4);
+}
+
+.save-btn:active {
+    transform: translateY(-1px);
+}
+
+.saved-wishes {
+    margin-top: 30px;
+    text-align: left;
+}
+
+.wish-item {
+    background: rgba(255, 255, 255, 0.7);
+    padding: 15px 20px;
+    border-radius: 15px;
+    margin-bottom: 15px;
+    border-left: 4px solid #667eea;
+    animation: slideIn 0.5s ease;
+    position: relative;
+}
+
+.wish-item p {
+    color: #555;
+    line-height: 1.6;
+    margin: 0;
+    word-wrap: break-word;
+}
+
+.wish-item .timestamp {
+    font-size: 0.85em;
+    color: #999;
+    margin-top: 8px;
+    display: block;
+}
+
+.wish-item .delete-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: #667eea;
+    color: white;
+    border: none;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: all 0.3s ease;
+}
+
+.wish-item .delete-btn:hover {
+    background: #764ba2;
+    transform: scale(1.1);
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateX(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Two Column Layout */
+.two-column-layout {
+    display: flex;
+    gap: 40px;
+    margin: 40px 0;
+    align-items: flex-start;
+}
+
+.left-column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.right-column {
+    flex: 1;
+}
+
+.photo-container {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    margin: 0 auto 20px;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    animation: photoFadeIn 0.8s ease-in-out;
+}
+
+.photo-1 {
+    animation-delay: 0.3s;
+}
+
+.photo-2 {
+    animation-delay: 0.6s;
+}
+
+.photo-3 {
+    animation-delay: 0.9s;
+}
+
+@keyframes photoFadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.main-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.photo-container:hover .main-photo {
+    transform: scale(1.1);
+}
+
+.photo-frame {
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    border: 3px solid rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+.love-letter {
+    background: rgba(255, 255, 255, 0.95);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    border: 2px solid rgba(102, 126, 234, 0.2);
+}
+
+.love-letter h2 {
+    color: #667eea;
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    text-align: center;
+    font-weight: 400;
+}
+
+.letter-content {
+    text-align: left;
+    line-height: 2;
+}
+
+.letter-content p {
+    color: #555;
+    font-size: 1.1em;
+    margin: 15px 0;
+}
+
+.letter-content .signature {
+    margin-top: 30px;
+    text-align: right;
+    font-size: 1.2em;
+    color: #667eea;
+    font-weight: 500;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 1.8em;
+    }
+    
+    .two-column-layout {
+        flex-direction: column;
+        gap: 30px;
+    }
+    
+    .photo-container {
+        width: 150px;
+        height: 150px;
+        margin: 0 auto 15px;
+    }
+    
+    .cake {
+        font-size: 6em;
+    }
+    
+    .love-letter {
+        padding: 20px;
+    }
+    
+    .love-letter h2 {
+        font-size: 1.4em;
+    }
+    
+    .letter-content p {
+        font-size: 1em;
+    }
+    
+    .content {
+        padding: 40px 30px;
+    }
+
+    .wishes-section h3 {
+        font-size: 1.2em;
+    }
+
+    #wishInput {
+        font-size: 0.95em;
+    }
+
+    .input-row {
+        flex-direction: column;
+    }
+
+    .save-btn {
+        width: 100%;
+        padding: 12px 20px;
+    }
+}
